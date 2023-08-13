@@ -46,7 +46,12 @@ export default function Summary({ transcript }) {
         ) : (
           <div className=''>
             <h2 className="text-3xl font-semibold pb-3">Summary</h2>
-            <p className=' text-xl '>{summary}</p>
+            <p className=' text-xl '>
+              {summary !== null ? (
+                {summary}
+              ) : (
+              <p className="italic">API key is invalid or Error in fetching; try refreshing</p>
+            )}</p>
           </div>
         )}
       </div>

@@ -30,13 +30,13 @@ export default function WatchVideo({ params }) {
   return (
     <>
       <Header />
-      <div className="w-full ">
-      <div className="w-full p-3">
+      <div className="mt-16 md:mt-3 ">
+      <div className="w-full p-3 px-6 md:px-4 md:py-0 py-5 h-[40vh] md:h-[72vh]">
                 <iframe
                     width="100%"
-                    height="420px"
+                    height="100%"
                     src={`https://www.youtube.com/embed/${id}`}
-                    className="rounded-3xl px-56"
+                    className="rounded-3xl md:px-56"
                     title="YouTube video player"
                     samesite="none"
                 />

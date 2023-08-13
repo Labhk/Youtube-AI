@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Loader from "@/components/Loader";
 
 export default function PlaylistOverview({params}) {
     const router = useRouter();
@@ -38,43 +39,54 @@ export default function PlaylistOverview({params}) {
     return (
         <>
             <Header />
-            <div className="flex justify-center mt-3">
-                <div className="text-center">
-                    <div className="text-4xl underline mb-5">Overview</div>
-                    {playlistData.length > 0 ? (
-                        <>
-                            <div className="flex justify-center">
-                                <Image
-                                    src={playlistData[0].snippet.thumbnails.high.url}
-                                    alt="Thumbnail"
-                                    width={340}
-                                    height={225}
-                                    className="w-full max-w-[340px] rounded-xl shadow-image"
-                                />
+            <div className="flex flex-col items-center justify-center mt-3 sm:flex-row">
+            <div className="text-center sm:w-1/2 sm:mr-10">
+                <div className="text-3xl md:text-4xl underline mb-5">Overview</div>
+                {playlistData.length > 0 ? (
+                    <>
+                        <div className="flex justify-center">
+                            <Image
+                                src={playlistData[0].snippet.thumbnails.high.url}
+                                alt="Thumbnail"
+                                width={340}
+                                height={225}
+                                className="w-full max-w-[340px] rounded-xl shadow-image"
+                            />
+                        </div>
+                        <div className="text-xl md:text-2xl font-bold mt-5 text-indigo-700 md:px-6 px-8">
+                            {playlistData[0].snippet.title}
+                        </div>
+                        <div className="flex flex-col md:flex-row justify-center mt-3">
+                            <div className="p-2 font-medium text-lg mr-0 md:mr-16 sm:mr-8">
+                                Publisher:{" "}
+                                <span className="text-indigo-700 font-semibold">
+                                    {playlistData[0].snippet.channelTitle}
+                                </span>
                             </div>
-                            <div className="text-2xl font-bold mt-5 text-indigo-700 px-28">{playlistData[0].snippet.title}</div>
-                            <div className="flex justify-center mt-3">
-                                <div className="p-2 font-medium text-lg mr-8">
-                                    Publisher : <span className="text-indigo-700 font-semibold">{playlistData[0].snippet.channelTitle}</span>
-                                </div>
-                                <div className="p-2 font-medium text-lg">
-                                    No. of videos : <span className="text-indigo-700 font-semibold">{playlistData.length}</span>
-                                </div>
+                            <div className="p-2 font-medium text-lg">
+                                No. of videos:{" "}
+                                <span className="text-indigo-700 font-semibold">
+                                    {playlistData.length}
+                                </span>
                             </div>
-                            <motion.button
-                                className="bg-gradient-to-br from-indigo-500 to-indigo-800 text-white text-xl font-medium px-7 py-2 rounded-xl mt-6"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={() => router.push(`/WatchPlaylist/${id}`)}
-                            >
-                                Start Course
-                            </motion.button>
-                        </>
-                    ) : (
-                        <div className="text-3xl font-semibold text-red-800">Failed to fetch ;-;</div>
-                    )}
-                </div>
+                        </div>
+                        <motion.button
+                            className="bg-gradient-to-br from-indigo-500 to-indigo-800 text-white text-xl font-medium px-6 py-2 rounded-xl mt-6 md:mt-2"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => router.push(`/WatchPlaylist/${id}`)}
+                        >
+                            Start Course
+                        </motion.button>
+                    </>
+                ) : (
+                    <div className="min-h-screen">
+                        <Loader/>
+                    </div>
+                )}
             </div>
+        </div>
+
         </>
     );
 }

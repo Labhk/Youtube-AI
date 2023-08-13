@@ -58,7 +58,7 @@ export default function Quiz({ transcript }) {
                 </div>
               ))
             ) : (
-              <p>No quiz data available.</p>
+              <p className="italic text-xl ">API key is invalid or Error in fetching; try refreshing</p>
             )}
           </div>
         )}

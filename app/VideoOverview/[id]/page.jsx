@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation'; 
 import Image from 'next/image';
+import Loader from "@/components/Loader";
 
 export default function VideoOverview({params}) {
     const router = useRouter();
@@ -38,9 +39,9 @@ export default function VideoOverview({params}) {
     return (
         <>
             <Header />
-            <div className="flex justify-center mt-3">
-                <div className="text-center">
-                    <div className="text-4xl font-serif underline mb-5">Overview</div>
+            <div className="flex flex-col items-center justify-center mt-3 sm:flex-row">
+                <div className="text-center sm:w-1/2 sm:mr-10">
+                    <div className="text-3xl md:text-4xl underline mb-5">Overview</div>
                     {videoData ? (
                         <>
                             <div className="flex justify-center">
@@ -52,9 +53,9 @@ export default function VideoOverview({params}) {
                                     className="w-full max-w-[340px] rounded-xl shadow-image"
                                 />
                             </div>
-                            <div className="text-2xl font-bold mt-5 text-indigo-700">{videoData.snippet.title}</div>
-                            <div className="flex justify-center mt-3">
-                                <div className="p-2 font-medium text-lg  mr-8">
+                            <div className="text-xl md:text-2xl font-bold mt-5 text-indigo-700 md:px-6 px-8">{videoData.snippet.title}</div>
+                            <div className="flex flex-col md:flex-row justify-center mt-3">
+                                <div className="p-2 font-medium text-lg mr-0 md:mr-16 sm:mr-8">
                                     Publisher : <span className="text-indigo-700 font-semibold">{videoData.snippet.channelTitle}</span>
                                 </div>
                                 <div className="p-2 font-medium text-lg ">
@@ -62,7 +63,7 @@ export default function VideoOverview({params}) {
                                 </div>
                             </div>
                             <motion.button
-                                className="bg-gradient-to-br from-indigo-500 to-indigo-800 text-white text-xl font-medium px-7 py-2 rounded-xl mt-6"
+                                className="bg-gradient-to-br from-indigo-500 to-indigo-800 text-white text-xl font-medium px-7 py-2 rounded-xl mt-6 md:mt-2"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => router.push(`/WatchVideo/${videoData.id}`)}
@@ -71,7 +72,9 @@ export default function VideoOverview({params}) {
                             </motion.button>
                         </>
                     ) : (
-                        <div className="text-3xl font-semibold text-red-800 min-h-screen">Failed to fetch ;-;</div>
+                        <div className="min-h-screen">
+                            <Loader/>
+                        </div>
                     )}
                 </div>
             </div>
