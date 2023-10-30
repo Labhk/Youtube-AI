@@ -18,7 +18,7 @@ export default function Header() {
                 <span className='text-3xl text-indigo-600 mr-1  '>
                 <div ><GiAbstract084 className="h-10 w-10" /></div>
                 </span>
-                <span className=' text-black font-serif'>CourseVerse</span>
+                <span className=' text-black font-serif'>VideoSage</span>
             </div>
 
             <div onClick={()=>setOpen(!open)}>
